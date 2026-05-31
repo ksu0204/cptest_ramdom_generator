@@ -1120,6 +1120,113 @@
         const price = randStep(rng, 1000, 10000, 500);
         const stock = randInt(rng, 1, 100);
         return problem(13, "PRODUCT 구조체 포인터 출력", ["구조체", "구조체 포인터", "함수 매개변수"], "PRODUCT 구조체의 color, price, stock 멤버를 입력받고 print_product 함수에 구조체 포인터를 전달하여 출력하시오.", ["color: 문자열", "price: 정수", "stock: 정수"], ["[color price원 재고:stock] 형식으로 출력한다."], `${color}\n${price}\n${stock}`, `[${color} ${price}원 재고:${stock}]`, "원본 PRODUCT 출력 문제를 별도 생성 소스로 추가하여 구조체 주문 처리 외 유형도 나오게 한다.");
+      }},
+      { week: 3, make: rng => {
+        const code = pick(rng, ["A", "B", "C", "D"]);
+        const count = randInt(rng, 1, 99);
+        const weight = randFloat(rng, 0.5, 9.9, 2);
+        return problem(3, "상품 기본 정보와 무게 자료형 출력", ["char/int/float", "변수 선언", "sizeof"], "상품 등급 코드, 수량, 무게를 각각 문자, 정수, 실수 변수에 저장하고 입력값과 각 변수의 크기를 함께 출력하시오.", ["grade: 상품 등급 문자 1개", "count: 상품 수량 정수", "weight: 상품 무게 실수"], ["등급, 수량, 무게를 출력한다.", "char, int, float 변수의 byte 크기를 출력한다."], `${code} ${count} ${weight.toFixed(2)}`, `등급: ${code}, 수량: ${count}, 무게: ${weight.toFixed(2)}\n크기: char 1 byte, int 4 byte, float 4 byte`, "성별/나이/키 입력 골격을 유지하되 상품 정보 소재로 바꾸어 자료형 선택과 sizeof를 함께 평가한다.");
+      }},
+      { week: 3, make: rng => {
+        const minutes = randInt(rng, 80, 360);
+        const hours = Math.trunc(minutes / 60);
+        const rest = minutes % 60;
+        return problem(3, "정수 나눗셈과 형 변환 시간 분리", ["int", "형 변환", "나눗셈/나머지"], "전체 시간을 분 단위 정수로 입력받아 시간과 남은 분으로 나누어 출력하시오.", ["total_min: 전체 시간(분) 정수"], ["시간과 남은 분을 정수로 출력한다.", "전체 시간을 시간 단위 실수로도 출력한다."], `${minutes}`, `${hours}시간 ${rest}분\n시간 단위: ${(minutes / 60).toFixed(2)}`, "환전 문제의 나눗셈/형 변환 골격을 시간 단위 변환 소재로 바꾸되, 자료형 변환 범위를 넘지 않는다.");
+      }},
+      { week: 4, make: rng => {
+        const ch = pick(rng, ["A", "K", "m", "z"]);
+        return problem(4, "문자 입출력 함수로 다음 문자 출력", ["getchar", "putchar", "printf"], "문자 하나를 입력받아 입력 문자와 ASCII 코드, 그리고 다음 문자를 출력하시오.", ["ch: 문자 1개"], ["입력 문자와 ASCII 코드 출력", "다음 문자를 putchar 또는 printf로 출력"], ch, `입력 문자: ${ch}\nASCII: ${ch.charCodeAt(0)}\n다음 문자: ${String.fromCharCode(ch.charCodeAt(0) + 1)}`, "표준 입출력 함수 범위 안에서 숫자 계산 대신 문자 입출력 소재로 변형한다.");
+      }},
+      { week: 4, make: rng => {
+        const attendance = randInt(rng, 60, 100);
+        const score = randInt(rng, 40, 100);
+        const pass = attendance >= 80 && score >= 60 ? 1 : 0;
+        return problem(4, "관계 연산과 논리 연산 결과 출력", ["관계연산자", "논리연산자", "printf"], "출석률과 시험 점수를 입력받아 두 조건을 모두 만족하는지 논리 연산 결과를 0 또는 1로 출력하시오.", ["attendance: 출석률 정수", "score: 시험 점수 정수", "통과 조건: 출석률 80 이상 그리고 점수 60 이상"], ["조건 만족 여부를 0 또는 1로 출력한다."], `${attendance} ${score}`, `통과 여부: ${pass}`, "if문 없이 관계연산자와 논리연산자의 결과값 자체를 출력하도록 변형한다.");
+      }},
+      { week: 5, make: rng => {
+        const month = randInt(rng, 1, 12);
+        const quarter = Math.floor((month - 1) / 3) + 1;
+        return problem(5, "switch로 월별 분기 출력", ["switch", "조건 제어문"], "월을 입력받아 switch문을 이용해 해당 월이 몇 분기에 속하는지 출력하시오.", ["month: 1~12 사이 정수"], ["분기 번호를 출력한다.", "범위를 벗어나면 오류 메시지를 출력한다."], `${month}`, `${quarter}분기`, "도형 선택 문제의 choice 분기 골격을 월/분기 판단 소재로 바꾼다.");
+      }},
+      { week: 5, make: rng => {
+        const age = randInt(rng, 8, 70);
+        const price = age < 13 ? 5000 : age < 20 ? 7000 : age >= 65 ? 6000 : 10000;
+        return problem(5, "중첩 if로 입장료 계산", ["if", "중첩 if", "조건 분기"], "나이를 입력받아 어린이, 청소년, 성인, 경로 조건에 따라 입장료를 계산하여 출력하시오.", ["age: 나이 정수", "어린이 13세 미만, 청소년 20세 미만, 경로 65세 이상"], ["계산된 입장료를 출력한다."], `${age}`, `입장료: ${price}원`, "주차비 조건 분기 골격을 나이별 요금 계산 소재로 바꾸어 중첩 if를 평가한다.");
+      }},
+      { week: 6, make: rng => {
+        const n = randInt(rng, 30, 120);
+        const divisor = pick(rng, [3, 4, 5, 7]);
+        let sum = 0;
+        for (let i = 1; i <= n; i++) if (i % divisor !== 0) sum += i;
+        return problem(6, "continue로 특정 배수 제외 합계", ["for문", "continue", "누적합"], `1부터 N까지의 수 중 ${divisor}의 배수를 제외하고 합계를 구하시오.`, ["N: 양의 정수", `${divisor}의 배수는 합계에서 제외`], ["제외 조건을 적용한 합계를 출력한다."], `${n}`, `${divisor}의 배수 제외 합: ${sum}`, "누적합 문제의 핵심 골격을 유지하면서 continue 사용을 평가하는 소재로 바꾼다.");
+      }},
+      { week: 6, make: rng => {
+        const num = randInt(rng, 1000, 9999);
+        const sum = String(num).split("").reduce((a, b) => a + Number(b), 0);
+        return problem(6, "while문으로 자릿수 합 계산", ["while문", "나머지 연산", "반복"], "양의 정수를 입력받아 while문으로 각 자릿수의 합을 계산하여 출력하시오.", ["N: 양의 정수"], ["각 자릿수의 합을 출력한다."], `${num}`, `자릿수 합: ${sum}`, "소수 판별처럼 반복 조건을 직접 관리하되, sqrt 대신 나눗셈/나머지 반복 소재로 바꾼다.");
+      }},
+      { week: 7, make: rng => {
+        const a = randInt(rng, 1, 50);
+        const b = randInt(rng, 1, 50);
+        const c = randInt(rng, 1, 50);
+        return problem(7, "세 정수 최댓값 반환 함수", ["함수", "인수", "반환값"], "정수 3개를 입력받아 max3 함수를 호출하고 가장 큰 값을 반환받아 출력하시오.", ["a b c: 정수 3개"], ["세 정수 중 최댓값을 출력한다."], `${a} ${b} ${c}`, `최댓값: ${Math.max(a, b, c)}`, "시간 변환 함수처럼 계산을 함수로 분리하되, 단위 변환 대신 비교 연산 소재로 바꾼다.");
+      }},
+      { week: 7, make: rng => {
+        const base = randInt(rng, 2, 5);
+        const exp = randInt(rng, 2, 5);
+        return problem(7, "반복 함수로 거듭제곱 계산", ["함수 작성", "반복", "반환값"], "밑과 지수를 입력받아 power 함수를 이용해 거듭제곱 값을 계산하여 출력하시오.", ["base: 밑 정수", "exp: 지수 정수"], ["base의 exp제곱 값을 출력한다."], `${base} ${exp}`, `${base}^${exp} = ${base ** exp}`, "재귀 또는 함수 호출 구조를 유지하면서 수학 함수 작성 능력을 평가한다.");
+      }},
+      { week: 8, make: rng => {
+        const values = Array.from({ length: 4 }, () => randInt(rng, 10, 99));
+        const max = Math.max(...values);
+        return problem(8, "static 최댓값 기억 함수", ["static 변수", "지역 변수", "함수 호출"], "정수 4개를 차례로 입력받고, 함수가 호출될 때마다 지금까지 입력된 값 중 최댓값을 기억하여 출력하시오.", ["정수 4개"], ["각 호출마다 현재 입력값과 지금까지의 최댓값을 출력한다."], values.join(" "), values.map((v, i) => `입력: ${v}, 현재 최댓값: ${Math.max(...values.slice(0, i + 1))}`).join("\n"), "static 평균 문제의 누적 상태 유지 골격을 최댓값 기억 소재로 바꾼다.");
+      }},
+      { week: 8, make: rng => {
+        const orders = Array.from({ length: 3 }, () => randInt(rng, 1, 5));
+        let stock = 20;
+        const lines = orders.map(v => {
+          stock -= v;
+          return `판매: ${v}, 남은 재고: ${stock}`;
+        });
+        return problem(8, "전역 변수 재고 차감 함수", ["전역 변수", "지역 변수", "함수"], "초기 재고를 전역 변수로 두고, 판매 수량을 입력받을 때마다 함수에서 재고를 차감하여 출력하시오.", ["판매 수량 3개"], ["각 판매 후 남은 재고를 출력한다."], orders.join(" "), lines.join("\n"), "전역 누적 점수 문제의 전역 상태 갱신 골격을 재고 차감 소재로 바꾼다.");
+      }},
+      { week: 9, make: rng => {
+        const words = ["banana", "program", "computer", "array"];
+        const word = pick(rng, words);
+        const ch = pick(rng, [...new Set(word.split(""))]);
+        const count = word.split("").filter(v => v === ch).length;
+        return problem(9, "문자 배열에서 특정 문자 개수 세기", ["문자 배열", "문자열 입력", "배열 요소 접근"], "문자열과 찾을 문자를 입력받아 문자열 안에 해당 문자가 몇 번 등장하는지 출력하시오.", ["str: 공백 없는 문자열", "target: 찾을 문자 1개"], ["target 문자의 등장 횟수를 출력한다."], `${word}\n${ch}`, `${ch} 개수: ${count}`, "배열 탐색 골격을 정수 배열에서 문자 배열 탐색으로 바꾼다.");
+      }},
+      { week: 9, make: rng => {
+        const word = pick(rng, ["hello", "student", "coding", "practice"]);
+        return problem(9, "문자 배열 길이 직접 계산", ["문자 배열", "널 문자", "문자열"], "문자열을 입력받아 strlen 함수를 사용하지 않고 문자 배열을 순회하여 길이를 출력하시오.", ["str: 공백 없는 문자열"], ["문자열 길이를 출력한다."], `${word}`, `길이: ${word.length}`, "문자열 입력 함수와 문자 배열 구조를 평가하도록 배열 순회 소재로 변형한다.");
+      }},
+      { week: 10, make: rng => {
+        const a = pick(rng, ["apple", "code", "desk"]);
+        const b = pick(rng, ["banana", "code", "zebra"]);
+        const result = a === b ? "같음" : "다름";
+        return problem(10, "문자열 비교 함수 결과 출력", ["strcmp", "문자열 처리함수", "문자 배열"], "두 문자열을 입력받아 strcmp 함수를 이용해 같은 문자열인지 비교하고 결과를 출력하시오.", ["str1: 첫 번째 문자열", "str2: 두 번째 문자열"], ["두 문자열이 같으면 같음, 다르면 다름을 출력한다."], `${a}\n${b}`, result, "답안 문자 비교 골격을 표준 문자열 처리 함수 strcmp 평가로 바꾼다.");
+      }},
+      { week: 10, make: rng => {
+        const first = pick(rng, ["Kim", "Lee", "Park"]);
+        const last = pick(rng, ["Min", "Jun", "Su"]);
+        return problem(10, "문자열 복사와 추가로 이름 만들기", ["strcpy", "strcat", "문자열 처리함수"], "성 문자열과 이름 문자열을 입력받아 strcpy와 strcat을 이용해 하나의 이름 문자열로 합쳐 출력하시오.", ["family: 성 문자열", "given: 이름 문자열"], ["두 문자열을 공백 없이 이어 붙인 결과를 출력한다."], `${first}\n${last}`, `${first}${last}`, "문자열 복사 문제의 골격을 문자열 추가 함수까지 확장하되 10주차 문자열 처리 범위 안에서 해결한다.");
+      }},
+      { week: 11, make: rng => {
+        const values = Array.from({ length: 5 }, () => randInt(rng, 1, 40));
+        const targetIndex = randInt(rng, 0, 4);
+        return problem(11, "포인터 연산으로 특정 원소 출력", ["포인터 연산", "배열과 포인터", "간접 참조"], "정수 배열과 인덱스를 입력받아 포인터 연산으로 해당 인덱스의 원소를 출력하시오.", ["정수 배열 원소 5개", "index: 0~4 사이 정수"], ["index 위치의 원소를 출력한다."], `${values.join(" ")}\n${targetIndex}`, `선택 원소: ${values[targetIndex]}`, "배열 포인터 순회 골격을 특정 원소 접근 문제로 바꾸어 포인터 산술을 평가한다.");
+      }},
+      { week: 12, make: rng => {
+        const phrase = pick(rng, ["C language", "pointer array", "hello world"]);
+        const chars = phrase.replaceAll(" ", "").length;
+        return problem(12, "포인터로 공백 제외 문자 수 세기", ["포인터와 문자열", "포인터 연산", "문자 비교"], "공백을 포함한 문자열을 입력받아 포인터로 순회하면서 공백이 아닌 문자의 개수를 출력하시오.", ["str: 공백을 포함할 수 있는 문자열"], ["공백을 제외한 문자 수를 출력한다."], phrase, `문자 수: ${chars}`, "공백 줄바꿈 변환 문제의 문자열 포인터 순회 골격을 문자 개수 세기 소재로 바꾼다.");
+      }},
+      { week: 13, make: rng => {
+        const name = pick(rng, ["kim", "lee", "park"]);
+        const mid = randInt(rng, 40, 100);
+        const fin = randInt(rng, 40, 100);
+        return problem(13, "STUDENT 구조체 총점 계산", ["구조체", "구조체 멤버", "구조체 함수 전달"], "학생 이름, 중간고사 점수, 기말고사 점수를 구조체에 저장하고 총점을 계산하여 출력하시오.", ["name: 학생 이름 문자열", "mid: 중간고사 점수", "final: 기말고사 점수"], ["학생 이름과 총점을 출력한다."], `${name}\n${mid} ${fin}`, `${name} 총점: ${mid + fin}`, "PRODUCT 구조체의 여러 멤버 저장 골격을 학생 점수 소재로 바꿔 구조체 기본 활용을 평가한다.");
       }}
     ];
 
@@ -1191,7 +1298,7 @@
       const answer = solutionFor(title, week);
       const skeleton = skeletonFor(title, week, inputSpec, outputSpec);
       const testcases = testcasesFor(sampleInput, sampleOutput);
-      const overview = overviewFor(title, prompt, inputSpec, extension);
+      const overview = overviewFor(title, prompt, inputSpec, outputSpec, extension);
       return { week, section: concept.section, title, concepts, prompt, inputSpec, outputSpec, sampleInput, sampleOutput, extension, overview, skeleton, testcases, answer };
     }
 
@@ -1207,9 +1314,48 @@
       return outputSpec.map(line => `       - ${line}`).join("\n");
     }
 
+    function makeHintComment(hints, indent = "    ") {
+      return hints.map((line, index) => `${indent}// 구현 힌트 ${index + 1}: ${line}`).join("\n");
+    }
+
+    function skeletonHintsFor(title, inputSpec, outputSpec) {
+      if (title.includes("입장료")) return ["age를 입력받는다.", "age < 13이면 5000원, age < 20이면 7000원, age >= 65이면 6000원, 그 외는 10000원으로 저장한다.", "출력 라벨은 \"입장료: n원\" 형식을 사용한다."];
+      if (title.includes("월별 분기")) return ["month를 입력받는다.", "1~3월은 1분기, 4~6월은 2분기, 7~9월은 3분기, 10~12월은 4분기로 처리한다.", "1~12 범위 밖이면 오류 메시지를 출력한다."];
+      if (title.includes("문자 입출력")) return ["getchar로 문자 1개를 입력받는다.", "%c로 문자, %d로 ASCII 코드를 출력한다.", "다음 문자는 ch + 1을 putchar 또는 printf로 출력한다."];
+      if (title.includes("관계 연산")) return ["attendance와 score를 입력받는다.", "통과 조건은 attendance >= 80 && score >= 60이다.", "조건식 결과를 0 또는 1로 출력한다."];
+      if (title.includes("시간 분리")) return ["total_min을 정수로 입력받는다.", "시간은 total_min / 60, 남은 분은 total_min % 60으로 계산한다.", "실수 시간은 total_min / 60.0으로 계산한다."];
+      if (title.includes("무게 자료형")) return ["grade는 char, count는 int, weight는 float로 선언한다.", "입력값을 출력한 뒤 sizeof로 각 변수 크기를 출력한다.", "weight는 소수 둘째 자리까지 출력한다."];
+      if (title.includes("배수 제외")) return ["1부터 N까지 반복한다.", "문제에 제시된 배수이면 continue로 합산을 건너뛴다.", "나머지 수만 sum에 누적한다."];
+      if (title.includes("자릿수 합")) return ["n % 10으로 마지막 자리를 구한다.", "n /= 10으로 처리한 자리를 제거한다.", "n이 0이 될 때까지 while문을 반복한다."];
+      if (title.includes("세 정수 최댓값")) return ["max3(a, b, c) 함수를 작성한다.", "세 값 중 가장 큰 값을 return한다.", "main에서는 반환값을 출력한다."];
+      if (title.includes("거듭제곱")) return ["power(base, exp) 함수를 작성한다.", "result를 1로 초기화하고 exp번 base를 곱한다.", "반환값을 \"base^exp = result\" 형식으로 출력한다."];
+      if (title.includes("구간 합")) return ["start > end이면 0을 반환한다.", "그 외에는 start + range_sum(start + 1, end)를 반환한다.", "main에서 start와 end를 입력받아 반환값을 출력한다."];
+      if (title.includes("팩토리얼")) return ["n <= 1이면 1을 반환한다.", "그 외에는 n * factorial(n - 1)을 반환한다.", "main에서 N을 입력받아 N! 값을 출력한다."];
+      if (title.includes("static 최댓값")) return ["함수 안에 static max_value와 initialized 변수를 둔다.", "첫 호출이거나 새 값이 더 크면 max_value를 갱신한다.", "호출할 때마다 현재 입력값과 현재 최댓값을 출력한다."];
+      if (title.includes("재고 차감")) return ["전역 변수 stock의 초기값은 20으로 둔다.", "판매 수량 3개를 순서대로 입력받는다.", "sell 함수에서 stock을 차감하고 남은 재고를 출력한다."];
+      if (title.includes("특정 문자 개수")) return ["문자열과 target 문자를 입력받는다.", "널 문자를 만날 때까지 배열을 순회한다.", "str[i] == target이면 count를 1 증가시킨다."];
+      if (title.includes("길이 직접")) return ["strlen을 사용하지 않는다.", "str[len]이 널 문자가 아닐 동안 len을 증가시킨다.", "최종 len을 출력한다."];
+      if (title.includes("문자열 비교")) return ["string.h를 포함한다.", "strcmp(str1, str2) == 0이면 \"같음\"을 출력한다.", "그 외에는 \"다름\"을 출력한다."];
+      if (title.includes("문자열 복사와 추가")) return ["strcpy(full, family)로 첫 문자열을 복사한다.", "strcat(full, given)으로 뒤에 이어 붙인다.", "full 배열은 두 문자열을 담을 만큼 크게 선언한다."];
+      if (title.includes("특정 원소")) return ["ptr에 배열의 시작 주소를 저장한다.", "ptr + index로 index번째 원소 주소를 계산한다.", "*(ptr + index)를 출력한다."];
+      if (title.includes("공백 제외")) return ["fgets로 공백 포함 문자열을 입력받는다.", "포인터를 널 문자까지 이동시키며 순회한다.", "공백과 개행이 아닌 문자만 count에 더한다."];
+      if (title.includes("STUDENT")) return ["name, mid, final 멤버를 가진 STUDENT 구조체를 정의한다.", "총점은 mid + final로 계산한다.", "함수에 구조체를 전달해 총점을 반환받는다."];
+      if (title.includes("배열 구간 합")) return ["N개의 정수와 시작/끝 인덱스를 입력받는다.", "s부터 e까지 포함해 반복한다.", "해당 원소만 sum에 누적한다."];
+      if (title.includes("최댓값")) return ["첫 원소의 인덱스를 최댓값/최솟값 위치로 초기화한다.", "배열 전체를 한 번 순회하며 더 큰 값과 더 작은 값을 갱신한다.", "값과 인덱스를 함께 출력한다."];
+      if (title.includes("버블 정렬")) return ["인접한 두 원소를 비교한다.", "정렬 조건에 맞지 않으면 두 값을 교환한다.", "정렬 전 배열과 정렬 후 배열을 모두 출력한다."];
+      if (title.includes("행렬")) return ["결과 행렬을 0으로 초기화한다.", "i, j, k 3중 반복문으로 곱셈을 수행한다.", "결과 행렬을 행 단위로 출력한다."];
+      if (title.includes("답안 채점")) return ["정답과 학생 답안을 같은 인덱스로 비교한다.", "맞힌 문항마다 5점을 더한다.", "학생별 점수를 각각 출력한다."];
+      if (title.includes("포인터")) return ["포인터에 대상 변수 또는 배열의 주소를 저장한다.", "간접 참조 또는 포인터 연산으로 값을 읽거나 수정한다.", "문제의 출력 라벨을 그대로 맞춘다."];
+      if (title.includes("문자열") || title.includes("strcpy")) return ["널 문자를 만날 때까지 한 글자씩 처리한다.", "새 배열에 저장하는 경우 마지막에 널 문자를 넣는다.", "공백 포함 여부에 따라 scanf 또는 fgets를 선택한다."];
+      if (title.includes("POINT")) return ["POINT 구조체에 x, y 좌표를 저장한다.", "거리 공식 sqrt((x2-x1)^2 + (y2-y1)^2)을 적용한다.", "결과는 소수 둘째 자리까지 출력한다."];
+      if (title.includes("PRODUCT")) return ["color, price, stock 멤버를 구조체에 저장한다.", "문자열 비교가 필요하면 strcmp를 사용한다.", "구조체 포인터는 -> 연산자로 멤버에 접근한다."];
+      return ["입력 조건에 적힌 값을 자료형에 맞게 입력받는다.", "세부 조건의 계산식과 기준값을 그대로 코드에 반영한다.", "출력 예시와 같은 라벨, 줄바꿈, 소수 자리수를 맞춘다."];
+    }
+
     function skeletonFor(title, week, inputSpec, outputSpec) {
       const inputComment = makeInputComment(inputSpec);
       const outputComment = makeOutputComment(outputSpec);
+      const hintComment = makeHintComment(skeletonHintsFor(title, inputSpec, outputSpec));
 
       if (title.includes("배열 구간 합") || title.includes("최댓값") || title.includes("버블 정렬")) {
         return `
@@ -1221,10 +1367,7 @@ ${inputComment}
     */
     int i;
 
-    // TODO 1: 배열과 필요한 변수 선언
-    // TODO 2: 배열 원소 입력
-    // TODO 3: 반복문으로 요구된 계산 또는 정렬 수행
-    // TODO 4: 아래 출력 형식에 맞게 결과 출력
+${hintComment}
     /*
 ${outputComment}
     */
@@ -1242,10 +1385,7 @@ int main(void) {
 ${inputComment}
     */
 
-    // TODO 1: 2차원 배열 선언 또는 초기화
-    // TODO 2: 행과 열을 순회할 반복문 작성
-    // TODO 3: 행별/열별 계산 결과 저장
-    // TODO 4: 출력 형식에 맞게 행 단위로 출력
+${hintComment}
 
     return 0;
 }`.trim();
@@ -1256,15 +1396,13 @@ ${inputComment}
 #include <stdio.h>
 
 int recursive_func(int n) {
-    // TODO 1: 종료 조건 작성
-    // TODO 2: 더 작은 문제로 재귀 호출
+${makeHintComment(skeletonHintsFor(title, inputSpec, outputSpec).slice(0, 2), "    ")}
 }
 
 int main(void) {
     int n;
 
-    // TODO 3: 입력 받기
-    // TODO 4: recursive_func 호출 후 출력
+${makeHintComment(skeletonHintsFor(title, inputSpec, outputSpec).slice(2), "    ") || "    // 구현 힌트 3: 입력값을 받아 recursive_func의 반환값을 출력한다."}
 
     return 0;
 }`.trim();
@@ -1279,10 +1417,7 @@ int main(void) {
 ${inputComment}
     */
 
-    // TODO 1: 배열 또는 변수 선언
-    // TODO 2: 포인터 변수에 주소 연결
-    // TODO 3: 간접 참조 또는 포인터 이동으로 처리
-    // TODO 4: 출력 형식에 맞게 결과 출력
+${hintComment}
 
     return 0;
 }`.trim();
@@ -1293,15 +1428,13 @@ ${inputComment}
 #include <stdio.h>
 
 typedef struct {
-    // TODO 1: 문제에서 요구하는 멤버 작성
+    /* 구현할 멤버는 문제의 입력 조건을 기준으로 작성 */
 } ITEM;
 
 int main(void) {
     ITEM data;
 
-    // TODO 2: 구조체 멤버 입력
-    // TODO 3: 구조체 변수 또는 구조체 포인터를 이용해 처리
-    // TODO 4: 출력 형식에 맞게 결과 출력
+${hintComment}
 
     return 0;
 }`.trim();
@@ -1311,16 +1444,14 @@ int main(void) {
         return `
 #include <stdio.h>
 
-// TODO 1: 필요한 전역 변수, static 변수, 또는 처리 함수 선언
+/* 필요한 전역 변수, static 변수, 또는 처리 함수를 이 위치에 작성 */
 
 int main(void) {
     /* 입력 항목
 ${inputComment}
     */
 
-    // TODO 2: 반복문 또는 함수 호출 구조 작성
-    // TODO 3: 상태값 갱신
-    // TODO 4: 출력 형식에 맞게 결과 출력
+${hintComment}
 
     return 0;
 }`.trim();
@@ -1334,10 +1465,7 @@ int main(void) {
 ${inputComment}
     */
 
-    // TODO 1: 필요한 변수 선언
-    // TODO 2: scanf로 입력 받기
-    // TODO 3: 문제 요구사항에 맞게 계산/분기/반복 처리
-    // TODO 4: 출력 형식에 맞게 printf 작성
+${hintComment}
     /*
 ${outputComment}
     */
@@ -1356,63 +1484,148 @@ ${outputComment}
       ];
     }
 
-    function overviewFor(title, prompt, inputSpec, extension) {
+    function overviewFor(title, prompt, inputSpec, outputSpec, extension) {
       const goal = readableGoalFor(title, prompt);
       const steps = readableStepsFor(title);
+      const rules = clarifyingRulesFor(title, inputSpec, outputSpec);
       return {
         goal,
         steps,
         inputs: inputSpec,
+        rules,
         extension,
       };
     }
 
+    function clarifyingRulesFor(title, inputSpec, outputSpec) {
+      if (title.includes("입장료")) return ["요금 기준을 반드시 코드에 반영합니다: 어린이 13세 미만 5000원, 청소년 13세 이상 20세 미만 7000원, 경로 65세 이상 6000원, 그 외 성인 10000원.", "조건이 겹치지 않도록 if-else if-else 구조로 한 가지 요금만 선택합니다.", "출력은 예시처럼 `입장료: 금액원` 형식으로 작성합니다."];
+      if (title.includes("월별 분기")) return ["1~3월은 1분기, 4~6월은 2분기, 7~9월은 3분기, 10~12월은 4분기입니다.", "1보다 작거나 12보다 큰 월은 잘못된 입력으로 처리합니다.", "switch문의 case를 여러 개 묶어 같은 분기 출력을 만들 수 있습니다."];
+      if (title.includes("도형")) return ["choice=1이면 정사각형 한 변을 입력받아 넓이와 둘레를 출력합니다.", "choice=2이면 직사각형 가로와 세로를 입력받아 넓이와 둘레를 출력합니다.", "choice=3이면 삼각형 밑변과 높이를 입력받아 넓이를 소수 첫째 자리까지 출력합니다."];
+      if (title.includes("거스름돈")) return ["거스름돈은 pay - cost로 계산하고, 10원 미만은 `change = change / 10 * 10` 방식으로 절사합니다.", "화폐 단위는 50000, 10000, 5000, 1000, 500, 100, 50, 10 순서로 계산합니다.", "개수가 0인 화폐 단위는 출력하지 않습니다."];
+      if (title.includes("주차비")) return ["기본 30분 이하는 2000원으로 처리합니다.", "30분 초과분은 10분마다 1000원을 추가하며, 남은 시간이 1분이라도 있으면 10분으로 올림 계산합니다.", "최종 요금이 25000원을 넘으면 25000원으로 제한합니다."];
+      if (title.includes("배수 제외")) return ["합산 범위는 1부터 N까지이며 N을 포함합니다.", "문제 문장에 표시된 배수는 합계에 넣지 않습니다.", "continue를 사용해 제외 대상 이후의 누적 코드를 건너뛰도록 작성합니다."];
+      if (title.includes("자릿수 합")) return ["입력 정수의 각 자리 숫자를 모두 더합니다.", "마지막 자리는 `% 10`, 다음 자리 이동은 `/ 10`을 사용합니다.", "예를 들어 1234라면 1+2+3+4를 계산합니다."];
+      if (title.includes("소수")) return ["소수는 1보다 큰 수 중 1과 자기 자신으로만 나누어지는 수입니다.", "나눠 보는 범위는 2부터 sqrt(N)까지로 제한합니다.", "N의 소수 여부, 1부터 N까지의 소수 목록, 소수 개수를 모두 출력합니다."];
+      if (title.includes("구구단")) return ["출력 범위의 시작 단과 끝 단을 모두 포함합니다.", "곱하는 수는 문제에 제시된 마지막 곱까지 포함합니다.", "한 행에 여러 단의 같은 곱셈 결과를 출력한 뒤 줄바꿈합니다."];
+      if (title.includes("문자 입출력")) return ["입력 문자는 1개만 처리합니다.", "ASCII 코드는 입력 문자를 정수로 출력한 값입니다.", "다음 문자는 입력 문자 코드값에 1을 더한 문자입니다."];
+      if (title.includes("관계 연산")) return ["통과 조건은 출석률 80 이상 그리고 시험 점수 60 이상입니다.", "두 조건을 모두 만족하면 1, 하나라도 만족하지 못하면 0을 출력합니다.", "if문 없이 관계 연산자와 논리 연산자의 결과를 바로 사용할 수 있습니다."];
+      if (title.includes("무게 자료형")) return ["grade는 문자 1개, count는 정수, weight는 실수로 저장합니다.", "weight 출력은 소수 둘째 자리까지 맞춥니다.", "sizeof 결과는 실행 환경에 따라 다를 수 있으므로 실제 sizeof 값을 출력합니다."];
+      if (title.includes("시간 분리")) return ["시간은 total_min / 60의 정수 몫입니다.", "남은 분은 total_min % 60입니다.", "시간 단위 실수값은 total_min / 60.0이며 소수 둘째 자리까지 출력합니다."];
+      if (title.includes("환전")) return ["각 통화별 환전 가능 금액은 원화 금액을 환율로 나눈 뒤 정수로 변환한 값입니다.", "소수 부분은 반올림하지 않고 버립니다.", "USD, EUR, JPY 라벨을 예시 출력과 같이 유지합니다."];
+      if (title.includes("평균 계산") || title.includes("보너스 점수")) return ["총점은 네 과목 점수에 보너스 점수를 더한 값입니다.", "평균은 총점을 4로 나눈 값이며, 보너스도 평균 계산에 포함됩니다.", "평균은 소수 둘째 자리까지 출력합니다."];
+      if (title.includes("RGB")) return ["red, green, blue는 각각 0 이상 255 이하의 정수입니다.", "색상값은 하위 바이트부터 red, green, blue 순서로 조립합니다.", "출력은 6자리 16진수이며 부족한 자리는 0으로 채웁니다."];
+      if (title.includes("세 정수 최댓값")) return ["함수 이름은 max3처럼 세 정수를 받는 형태로 작성합니다.", "반환값은 세 값 중 가장 큰 정수입니다.", "출력은 함수의 반환값을 사용합니다."];
+      if (title.includes("거듭제곱")) return ["base의 exp제곱을 반복 곱셈으로 계산합니다.", "exp가 2라면 base를 두 번 곱합니다.", "결과는 정수로 출력합니다."];
+      if (title.includes("구간 합")) return ["합산 범위는 start부터 end까지이며 양 끝값을 모두 포함합니다.", "재귀 함수는 start가 end보다 커졌을 때 0을 반환하도록 종료 조건을 둡니다.", "반환값을 main에서 출력 형식에 맞게 보여줍니다."];
+      if (title.includes("팩토리얼")) return ["N!은 1부터 N까지의 모든 정수를 곱한 값입니다.", "재귀 종료 조건은 n <= 1일 때 1을 반환하는 것입니다.", "입력 범위는 문제의 N 조건을 따릅니다."];
+      if (title.includes("static 최댓값")) return ["입력값은 총 4개이며 함수는 4번 호출됩니다.", "static 변수는 이전 호출에서 저장한 최댓값을 유지해야 합니다.", "각 호출마다 현재 입력값과 지금까지의 최댓값을 출력합니다."];
+      if (title.includes("재고 차감")) return ["초기 재고는 20개로 둡니다.", "판매 수량은 3개 입력받고, 입력 순서대로 재고에서 차감합니다.", "각 판매 후 남은 재고를 바로 출력합니다."];
+      if (title.includes("은행")) return ["메뉴 번호 1은 입금, 2는 출금, 3은 잔액 조회, 4는 종료입니다.", "출금액이 현재 잔액보다 크면 잔액을 바꾸지 않습니다.", "choice 4가 입력되면 반복을 종료하고 종료 메시지를 출력합니다."];
+      if (title.includes("주사위")) return ["총 3라운드를 처리합니다.", "각 라운드마다 x와 y의 점수를 전역 변수에 누적합니다.", "최종 누적 점수가 더 큰 플레이어를 승자로 출력하고, 같으면 동점으로 출력합니다."];
+      if (title.includes("배열 구간 합")) return ["배열 인덱스는 0부터 시작합니다.", "구간은 s부터 e까지이며 e 위치의 원소도 포함합니다.", "s와 e는 입력된 배열 크기 안에 있다고 가정합니다."];
+      if (title.includes("버블 정렬")) return ["정렬 전 배열과 정렬 후 배열을 모두 출력합니다.", "내림차순은 큰 값이 앞에 오도록, 오름차순은 작은 값이 앞에 오도록 교환합니다.", "실수 출력은 예시처럼 소수 둘째 자리까지 맞춥니다."];
+      if (title.includes("최댓값")) return ["최댓값과 최솟값을 모두 찾아야 합니다.", "각 값이 저장된 인덱스도 함께 출력합니다.", "배열에 음수가 있어도 동작하도록 첫 원소 기준으로 초기화합니다."];
+      if (title.includes("특정 문자 개수")) return ["문자열은 공백 없는 문자열로 입력받습니다.", "target과 같은 문자가 등장할 때마다 count를 증가시킵니다.", "대소문자는 서로 다른 문자로 취급합니다."];
+      if (title.includes("길이 직접")) return ["strlen 함수는 사용하지 않습니다.", "널 문자 전까지의 문자 개수가 길이입니다.", "공백 없는 문자열을 기준으로 처리합니다."];
+      if (title.includes("문자열 비교")) return ["두 문자열 비교에는 strcmp를 사용합니다.", "strcmp 결과가 0이면 `같음`, 0이 아니면 `다름`을 출력합니다.", "문자열 비교에 == 연산자를 사용하지 않습니다."];
+      if (title.includes("문자열 복사와 추가")) return ["strcpy로 성 문자열을 결과 배열에 먼저 복사합니다.", "strcat으로 이름 문자열을 뒤에 붙입니다.", "결과 문자열에는 공백을 넣지 않습니다."];
+      if (title.includes("답안 채점")) return ["같은 인덱스의 문자끼리 비교합니다.", "맞은 문항 하나당 5점입니다.", "학생별 점수는 서로 독립적으로 계산합니다."];
+      if (title.includes("행렬")) return ["2x3 행렬 A와 3x2 행렬 B를 곱해 2x2 행렬 C를 만듭니다.", "C[i][j]는 A의 i행과 B의 j열을 곱해 더한 값입니다.", "결과 행렬은 행 단위로 출력합니다."];
+      if (title.includes("학생별 점수")) return ["2차원 배열의 한 행은 학생 한 명의 점수입니다.", "각 학생마다 합계와 평균을 따로 계산합니다.", "평균은 정수 나눗셈 결과로 출력합니다."];
+      if (title.includes("특정 원소")) return ["입력 인덱스는 0부터 4까지입니다.", "배열 첨자 arr[index] 대신 포인터 연산 *(ptr + index)를 사용합니다.", "선택된 원소 하나만 출력합니다."];
+      if (title.includes("공백 제외")) return ["공백 문자는 개수에 포함하지 않습니다.", "fgets로 입력받은 개행 문자도 개수에서 제외합니다.", "포인터를 한 칸씩 이동하며 널 문자 전까지 검사합니다."];
+      if (title.includes("문자열 뒤집기")) return ["원본 문자열의 마지막 문자부터 tmp의 첫 위치에 복사합니다.", "복사 후 tmp 끝에 널 문자를 넣습니다.", "공백 없는 문자열을 기준으로 처리합니다."];
+      if (title.includes("set 배열")) return ["배열 용량은 5개입니다.", "이미 존재하는 값은 추가하지 않습니다.", "배열이 가득 찬 상태에서 새 값이 들어오면 용량 초과 메시지를 출력합니다."];
+      if (title.includes("POINT")) return ["두 점은 각각 x, y 좌표를 갖는 구조체로 저장합니다.", "거리 공식은 sqrt((x2-x1)^2 + (y2-y1)^2)입니다.", "거리 출력은 소수 둘째 자리까지 맞춥니다."];
+      if (title.includes("STUDENT")) return ["name은 문자열, mid와 final은 정수 점수입니다.", "총점은 mid + final입니다.", "출력은 `이름 총점: 점수` 형식을 사용합니다."];
+      if (title.includes("PRODUCT")) return ["color는 문자열, price와 stock은 정수입니다.", "구조체 포인터 문제에서는 -> 연산자를 사용해 멤버에 접근합니다.", "구조체 배열 검색이 포함되면 색상 비교에는 strcmp를 사용합니다."];
+      return [...outputSpec, "출력 라벨과 줄바꿈은 예시 출력과 동일하게 맞춥니다."];
+    }
+
     function readableGoalFor(title, prompt) {
+      if (title.includes("무게 자료형")) return "상품 등급, 수량, 무게를 서로 다른 자료형 변수에 저장합니다. 입력값 출력과 sizeof 결과를 함께 확인해 자료형 선택을 연습합니다.";
+      if (title.includes("시간 분리")) return "전체 분 값을 정수 나눗셈과 나머지 연산으로 시간과 분으로 나눕니다. 같은 값을 실수 시간 단위로도 출력해 형 변환 차이를 확인합니다.";
       if (title.includes("환전")) return "입력된 원화 금액을 여러 통화로 환산하는 프로그램을 작성합니다. 계산 결과는 실제 환전 가능한 정수 금액으로 출력합니다.";
+      if (title.includes("문자 입출력")) return "문자 하나를 표준 입력으로 받고, 문자 자체와 ASCII 코드, 다음 문자를 표준 출력 함수로 출력합니다.";
+      if (title.includes("관계 연산")) return "출석률과 시험 점수를 관계 연산자로 비교하고, 논리 연산자를 이용해 두 조건을 동시에 만족하는지 판단합니다.";
       if (title.includes("RGB")) return "red, green, blue 값을 각각 입력받아 하나의 24비트 색상 정수로 조립합니다. 바이트 배치와 16진수 출력 형식을 확인하는 문제입니다.";
+      if (title.includes("월별 분기")) return "입력된 월을 switch문으로 분기하여 해당 월이 몇 분기에 속하는지 출력합니다.";
+      if (title.includes("입장료")) return "나이를 기준으로 어린이, 청소년, 성인, 경로 조건을 차례로 판단해 입장료를 계산합니다.";
       if (title.includes("도형")) return "사용자가 선택한 도형 종류에 따라 필요한 길이를 입력받고, 해당 도형의 넓이와 둘레 또는 넓이를 계산합니다.";
       if (title.includes("거스름돈")) return "상품 가격과 지불 금액의 차이를 구한 뒤, 큰 화폐 단위부터 몇 개씩 필요한지 계산합니다.";
       if (title.includes("주차비")) return "주차 시간을 분 단위로 입력받아 기본 요금, 추가 요금, 하루 최대 요금을 차례대로 적용합니다.";
+      if (title.includes("배수 제외")) return "1부터 N까지 반복하면서 특정 배수는 continue로 건너뛰고, 나머지 값만 누적해 합계를 구합니다.";
+      if (title.includes("자릿수 합")) return "양의 정수를 while문으로 반복 처리하면서 마지막 자리부터 분리해 각 자릿수의 합을 구합니다.";
       if (title.includes("소수")) return "입력된 정수가 소수인지 판별하고, 1부터 입력값까지 존재하는 모든 소수와 개수를 함께 출력합니다.";
       if (title.includes("구구단")) return "지정된 단 범위와 곱 범위에 맞춰 구구단 표를 행 단위로 출력합니다.";
+      if (title.includes("세 정수 최댓값")) return "세 정수를 함수의 인수로 전달하고, 함수가 가장 큰 값을 반환하도록 작성합니다.";
+      if (title.includes("거듭제곱")) return "밑과 지수를 함수에 전달하고, 함수 내부 반복문으로 거듭제곱 결과를 계산합니다.";
       if (title.includes("재귀") || title.includes("팩토리얼")) return "반복문 대신 재귀 함수를 사용해 작은 문제로 나누어 계산 결과를 구합니다.";
+      if (title.includes("static 최댓값")) return "static 지역 변수를 이용해 함수 호출이 끝난 뒤에도 지금까지의 최댓값을 기억합니다.";
+      if (title.includes("재고 차감")) return "전역 변수에 저장된 재고를 함수 호출마다 갱신하고, 판매 후 남은 재고를 출력합니다.";
       if (title.includes("은행")) return "입금, 출금, 잔액 조회, 종료 메뉴를 함수로 분리해 계좌 잔액을 갱신하는 프로그램을 작성합니다.";
       if (title.includes("주사위")) return "세 번의 주사위 입력을 받아 전역 변수에 점수를 누적하고, 최종 누적 점수로 승패를 판단합니다.";
+      if (title.includes("특정 문자 개수")) return "문자 배열을 처음부터 끝까지 순회하면서 찾을 문자와 같은 원소가 몇 개인지 셉니다.";
+      if (title.includes("길이 직접")) return "문자열 끝의 널 문자를 만날 때까지 문자 배열을 순회하여 문자열 길이를 직접 계산합니다.";
       if (title.includes("배열 구간 합")) return "정수 배열에서 시작 인덱스부터 끝 인덱스까지의 원소를 모두 더해 구간 합을 구합니다.";
       if (title.includes("버블 정렬")) return "실수 배열을 입력받아 인접한 두 값을 비교하고 교환하는 버블 정렬 방식으로 정렬합니다.";
       if (title.includes("최댓값")) return "정수 배열을 한 번 순회하면서 최댓값과 최솟값, 그리고 두 값이 저장된 인덱스를 찾습니다.";
+      if (title.includes("문자열 비교")) return "두 문자열을 strcmp 함수로 비교하고, 비교 결과에 따라 같은 문자열인지 출력합니다.";
+      if (title.includes("문자열 복사와 추가")) return "strcpy로 첫 문자열을 복사한 뒤 strcat으로 두 번째 문자열을 이어 붙여 하나의 문자열을 만듭니다.";
       if (title.includes("답안 채점")) return "정답 문자열과 학생 답안을 같은 위치끼리 비교하여 학생별 점수를 계산합니다.";
       if (title.includes("행렬")) return "두 행렬을 중첩 반복문으로 곱하여 결과 행렬의 각 원소를 계산합니다.";
       if (title.includes("학생별 점수")) return "2차원 배열에 저장된 학생별 과목 점수를 이용해 각 학생의 합계와 평균을 계산합니다.";
+      if (title.includes("특정 원소")) return "배열의 시작 주소를 포인터에 저장하고, 포인터 연산으로 원하는 인덱스의 원소에 접근합니다.";
+      if (title.includes("공백 제외")) return "문자열을 포인터로 한 글자씩 순회하며 공백이 아닌 문자만 세어 출력합니다.";
       if (title.includes("포인터")) return "포인터가 가리키는 원본 변수 또는 배열 원소를 간접 참조하여 값을 읽거나 변경합니다.";
       if (title.includes("문자열") || title.includes("strcpy")) return "문자 배열을 포인터로 순회하면서 복사, 변환, 역순 저장 중 하나를 수행합니다.";
       if (title.includes("set 배열")) return "정수 배열을 집합처럼 사용하여 이미 있는 값은 추가하지 않고, 새 값만 저장합니다.";
       if (title.includes("POINT")) return "두 점의 좌표를 구조체에 저장하고 거리 공식을 이용해 두 점 사이의 거리를 계산합니다.";
+      if (title.includes("STUDENT")) return "학생 이름과 점수를 구조체 멤버로 저장하고, 구조체 데이터를 함수에 전달해 총점을 계산합니다.";
       if (title.includes("PRODUCT")) return "상품 정보를 구조체로 묶어 저장하고, 구조체 포인터 또는 구조체 배열을 이용해 출력/주문 처리를 수행합니다.";
       return `${prompt} 입력, 처리, 출력의 흐름을 분리해 작성하면 됩니다.`;
     }
 
     function readableStepsFor(title) {
+      if (title.includes("무게 자료형")) return ["grade, count, weight 변수를 각각 char, int, float로 선언합니다.", "입력값을 변수에 저장합니다.", "저장된 값을 지정된 형식으로 출력합니다.", "sizeof로 각 변수의 byte 크기를 출력합니다."];
+      if (title.includes("시간 분리")) return ["전체 분 값을 정수로 입력받습니다.", "60으로 나눈 몫을 시간으로 저장합니다.", "60으로 나눈 나머지를 남은 분으로 저장합니다.", "60.0으로 나누어 실수 시간도 출력합니다."];
       if (title.includes("환전")) return ["원화 금액을 정수로 입력받습니다.", "각 통화의 환율 상수를 코드에 둡니다.", "금액을 환율로 나누고 정수로 변환합니다.", "통화별 결과를 지정된 라벨로 출력합니다."];
+      if (title.includes("문자 입출력")) return ["문자 하나를 입력받습니다.", "문자 자체를 출력합니다.", "문자를 int로 출력해 ASCII 코드를 확인합니다.", "문자 값에 1을 더해 다음 문자를 출력합니다."];
+      if (title.includes("관계 연산")) return ["출석률과 점수를 입력받습니다.", "출석률이 80 이상인지 비교합니다.", "점수가 60 이상인지 비교합니다.", "두 비교 결과를 &&로 연결해 0 또는 1을 출력합니다."];
       if (title.includes("RGB")) return ["세 색상값을 0~255 범위의 정수로 입력받습니다.", "각 값을 unsigned char에 저장합니다.", "blue, green, red 순서로 시프트하여 하나의 정수로 합칩니다.", "6자리 16진수로 출력합니다."];
+      if (title.includes("월별 분기")) return ["월 값을 입력받습니다.", "switch문에서 1~12월을 분기합니다.", "월에 맞는 분기 번호를 출력합니다.", "1~12가 아니면 오류 메시지를 출력합니다."];
+      if (title.includes("입장료")) return ["나이를 입력받습니다.", "어린이 조건을 먼저 확인합니다.", "청소년, 경로, 성인 조건을 차례대로 판단합니다.", "계산된 입장료를 출력합니다."];
       if (title.includes("도형")) return ["choice 값을 먼저 입력받습니다.", "choice에 따라 필요한 길이 개수를 다르게 입력받습니다.", "선택된 도형 공식만 계산합니다.", "도형 이름이 드러나도록 결과를 출력합니다."];
       if (title.includes("거스름돈")) return ["지불 금액에서 상품 가격을 뺍니다.", "10원 미만은 절사합니다.", "큰 단위부터 몫과 나머지를 계산합니다.", "개수가 0인 단위는 출력하지 않습니다."];
       if (title.includes("주차비")) return ["주차 시간을 입력받습니다.", "기본 시간 이하인지 먼저 판단합니다.", "초과 시간은 단위 시간 기준으로 올림 계산합니다.", "최대 요금을 넘으면 최대 요금으로 제한합니다."];
+      if (title.includes("배수 제외")) return ["N을 입력받습니다.", "1부터 N까지 for문으로 반복합니다.", "제외할 배수이면 continue로 아래 계산을 건너뜁니다.", "남은 수만 sum에 더해 출력합니다."];
+      if (title.includes("자릿수 합")) return ["양의 정수를 입력받습니다.", "N이 0보다 큰 동안 반복합니다.", "N % 10으로 마지막 자리를 구해 더합니다.", "N /= 10으로 다음 자리로 이동합니다."];
       if (title.includes("소수")) return ["소수 판별 함수를 작성합니다.", "2부터 sqrt(N)까지만 나누어 봅니다.", "N의 소수 여부를 출력합니다.", "1부터 N까지 반복하며 소수 목록과 개수를 구합니다."];
       if (title.includes("구구단")) return ["출력할 시작 단과 끝 단을 정합니다.", "바깥 반복문은 곱하는 수를 담당합니다.", "안쪽 반복문은 단을 담당합니다.", "한 행을 출력한 뒤 줄바꿈합니다."];
+      if (title.includes("세 정수 최댓값")) return ["정수 3개를 입력받습니다.", "max3 함수에 세 값을 인수로 전달합니다.", "함수 안에서 가장 큰 값을 찾습니다.", "반환값을 main에서 출력합니다."];
+      if (title.includes("거듭제곱")) return ["밑과 지수를 입력받습니다.", "power 함수를 작성합니다.", "함수 안에서 지수 횟수만큼 곱합니다.", "계산 결과를 반환받아 출력합니다."];
       if (title.includes("재귀") || title.includes("팩토리얼")) return ["재귀 함수의 종료 조건을 먼저 정합니다.", "현재 값으로 해야 할 계산을 작성합니다.", "다음 호출에서는 더 작은 범위를 넘깁니다.", "main에서 함수를 호출하고 결과를 출력합니다."];
+      if (title.includes("static 최댓값")) return ["함수 안에 static 최댓값 변수를 둡니다.", "첫 호출인지 확인할 수 있는 static 변수를 함께 둡니다.", "새 입력값이 더 크면 최댓값을 갱신합니다.", "호출할 때마다 현재 입력과 최댓값을 출력합니다."];
+      if (title.includes("재고 차감")) return ["전역 재고 변수를 선언합니다.", "판매 수량을 입력받습니다.", "함수 안에서 전역 재고를 감소시킵니다.", "판매 후 남은 재고를 출력합니다."];
       if (title.includes("은행")) return ["초기 잔액을 입력받습니다.", "메뉴 번호를 반복해서 읽습니다.", "입금/출금/조회 기능을 함수로 처리합니다.", "종료 번호가 입력되면 반복을 멈춥니다."];
       if (title.includes("주사위")) return ["전역 누적 점수 변수를 선언합니다.", "3라운드 동안 x, y 값을 입력받습니다.", "함수 안에서 누적 점수를 갱신합니다.", "최종 점수를 비교해 승자를 출력합니다."];
+      if (title.includes("특정 문자 개수")) return ["문자열과 찾을 문자를 입력받습니다.", "문자열의 첫 문자부터 순회합니다.", "현재 문자가 target과 같으면 count를 증가시킵니다.", "널 문자를 만나면 반복을 끝내고 count를 출력합니다."];
+      if (title.includes("길이 직접")) return ["문자열을 입력받습니다.", "인덱스를 0부터 시작합니다.", "str[i]가 널 문자가 아닐 동안 i를 증가시킵니다.", "최종 i 값을 길이로 출력합니다."];
       if (title.includes("배열 구간 합")) return ["배열 크기와 원소를 입력받습니다.", "시작/끝 인덱스를 입력받습니다.", "해당 인덱스 구간을 포함해 순회합니다.", "누적합을 출력합니다."];
       if (title.includes("버블 정렬")) return ["배열 원소를 입력받습니다.", "인접한 두 원소를 비교합니다.", "정렬 조건에 맞지 않으면 교환합니다.", "정렬 전/후 배열을 출력합니다."];
       if (title.includes("최댓값")) return ["배열 원소를 입력받습니다.", "최댓값/최솟값 인덱스를 0으로 초기화합니다.", "배열을 순회하며 더 큰 값과 더 작은 값을 갱신합니다.", "값과 위치를 함께 출력합니다."];
+      if (title.includes("문자열 비교")) return ["두 문자열을 입력받습니다.", "strcmp의 반환값을 확인합니다.", "반환값이 0이면 같은 문자열로 판단합니다.", "같음 또는 다름을 출력합니다."];
+      if (title.includes("문자열 복사와 추가")) return ["결과를 저장할 문자 배열을 준비합니다.", "strcpy로 첫 문자열을 복사합니다.", "strcat으로 두 번째 문자열을 뒤에 붙입니다.", "완성된 문자열을 출력합니다."];
       if (title.includes("답안 채점")) return ["정답 문자열을 입력받습니다.", "학생 답안 2차원 배열을 준비합니다.", "문항별로 문자를 비교합니다.", "맞은 문항 수에 배점을 곱해 출력합니다."];
       if (title.includes("행렬")) return ["두 행렬을 입력받거나 초기화합니다.", "결과 행렬을 0으로 초기화합니다.", "i, j, k 세 반복문으로 곱셈을 수행합니다.", "결과 행렬을 행 단위로 출력합니다."];
       if (title.includes("학생별 점수")) return ["학생별 과목 점수를 2차원 배열에 둡니다.", "학생 한 명의 행을 순회하며 합계를 구합니다.", "과목 수로 나누어 평균을 구합니다.", "학생 번호와 함께 출력합니다."];
+      if (title.includes("특정 원소")) return ["정수 배열과 인덱스를 입력받습니다.", "포인터에 배열의 시작 주소를 저장합니다.", "ptr + index로 해당 위치 주소를 구합니다.", "간접 참조로 원소 값을 출력합니다."];
+      if (title.includes("공백 제외")) return ["공백 포함 문자열을 입력받습니다.", "포인터를 문자열 첫 문자에 둡니다.", "널 문자를 만날 때까지 포인터를 이동합니다.", "현재 문자가 공백이 아니면 개수를 증가시킵니다."];
       if (title.includes("포인터")) return ["변수 또는 배열을 선언합니다.", "포인터에 주소를 저장합니다.", "간접 참조로 값을 읽거나 수정합니다.", "수정된 원본 값을 출력합니다."];
       if (title.includes("문자열") || title.includes("strcpy")) return ["문자 배열을 준비합니다.", "문자 포인터가 원본과 대상 배열을 가리키게 합니다.", "널 문자를 만날 때까지 한 글자씩 처리합니다.", "대상 문자열 끝에 널 문자를 넣습니다."];
       if (title.includes("set 배열")) return ["현재 저장된 원소 수를 관리합니다.", "새 값이 이미 있는지 먼저 검색합니다.", "공간이 남아 있으면 배열 끝에 추가합니다.", "추가 후 배열 상태를 출력합니다."];
       if (title.includes("POINT")) return ["POINT 구조체를 정의합니다.", "두 점의 x, y 좌표를 입력받습니다.", "거리 공식에 좌표 차이를 대입합니다.", "결과를 소수 둘째 자리까지 출력합니다."];
+      if (title.includes("STUDENT")) return ["STUDENT 구조체를 정의합니다.", "이름, 중간고사 점수, 기말고사 점수를 멤버에 저장합니다.", "총점을 계산하는 함수를 작성합니다.", "학생 이름과 총점을 출력합니다."];
       if (title.includes("PRODUCT")) return ["PRODUCT 구조체를 정의합니다.", "색상, 가격, 재고를 멤버로 저장합니다.", "구조체 포인터 또는 배열로 값을 전달합니다.", "출력 형식에 맞게 상품 정보를 보여줍니다."];
       return ["입력값을 자료형에 맞게 받습니다.", "문제 조건에 맞는 계산 또는 처리를 수행합니다.", "출력 형식을 정확히 맞춥니다."];
     }
@@ -1430,6 +1643,36 @@ int main(void) {
     printf("성별: %c, 나이: %d, 키: %.1f, 전공: %c\\n", gender, age, height, major);
     return 0;
 }`, ["문자 입력 앞에는 공백을 넣어 이전 개행 문자를 건너뛴다.", "float 출력은 %.1f처럼 자리수를 지정한다.", "자료형과 scanf 서식 문자를 반드시 맞춘다."]);
+
+      if (title.includes("상품 기본 정보")) return sol(`
+#include <stdio.h>
+
+int main(void) {
+    char grade;
+    int count;
+    float weight;
+
+    scanf(" %c %d %f", &grade, &count, &weight);
+    printf("등급: %c, 수량: %d, 무게: %.2f\\n", grade, count, weight);
+    printf("크기: char %zu byte, int %zu byte, float %zu byte\\n", sizeof(grade), sizeof(count), sizeof(weight));
+    return 0;
+}`, ["문자, 정수, 실수 변수의 서식 문자를 구분한다.", "sizeof 결과는 %zu로 출력한다.", "문자 입력 앞의 공백은 이전 개행 문자를 건너뛰게 한다."]);
+
+      if (title.includes("시간 분리")) return sol(`
+#include <stdio.h>
+
+int main(void) {
+    int total_min;
+    int hour, minute;
+
+    scanf("%d", &total_min);
+    hour = total_min / 60;
+    minute = total_min % 60;
+
+    printf("%d시간 %d분\\n", hour, minute);
+    printf("시간 단위: %.2f\\n", total_min / 60.0);
+    return 0;
+}`, ["정수 나눗셈의 몫은 시간, 나머지는 분이 된다.", "60.0으로 나누면 실수 결과를 얻을 수 있다.", "같은 입력값도 자료형에 따라 계산 결과 표현이 달라진다."]);
 
       if (title.includes("환전")) return sol(`
 #include <stdio.h>
@@ -1471,6 +1714,34 @@ int main(void) {
     printf("총점: %d, 평균: %.2f\\n", total, avg);
     return 0;
 }`, ["평균 계산에서 4.0을 사용해 실수 나눗셈을 만든다.", "초기 보너스 점수는 total 계산에 포함한다.", "소수 둘째 자리 출력은 %.2f를 사용한다."]);
+
+      if (title.includes("문자 입출력")) return sol(`
+#include <stdio.h>
+
+int main(void) {
+    char ch;
+
+    ch = getchar();
+    printf("입력 문자: %c\\n", ch);
+    printf("ASCII: %d\\n", ch);
+    printf("다음 문자: ");
+    putchar(ch + 1);
+    putchar('\\n');
+    return 0;
+}`, ["getchar는 문자 하나를 입력받는다.", "char를 %d로 출력하면 ASCII 코드 값을 볼 수 있다.", "putchar는 문자 하나를 출력하는 함수다."]);
+
+      if (title.includes("관계 연산")) return sol(`
+#include <stdio.h>
+
+int main(void) {
+    int attendance, score;
+    int pass;
+
+    scanf("%d %d", &attendance, &score);
+    pass = (attendance >= 80) && (score >= 60);
+    printf("통과 여부: %d\\n", pass);
+    return 0;
+}`, ["관계 연산자의 결과는 참이면 1, 거짓이면 0이다.", "&&는 두 조건이 모두 참일 때만 참이다.", "if문 없이도 논리 결과를 변수에 저장해 출력할 수 있다."]);
 
       if (title.includes("RGB")) return sol(`
 #include <stdio.h>
@@ -1522,6 +1793,48 @@ int main(void) {
     return 0;
 }`, ["choice에 따라 필요한 입력 개수가 달라진다.", "삼각형 넓이는 2.0으로 나누어 실수 결과를 만든다.", "분기별 출력 형식을 구분한다."]);
 
+      if (title.includes("월별 분기")) return sol(`
+#include <stdio.h>
+
+int main(void) {
+    int month;
+    scanf("%d", &month);
+
+    switch (month) {
+    case 1: case 2: case 3:
+        printf("1분기\\n");
+        break;
+    case 4: case 5: case 6:
+        printf("2분기\\n");
+        break;
+    case 7: case 8: case 9:
+        printf("3분기\\n");
+        break;
+    case 10: case 11: case 12:
+        printf("4분기\\n");
+        break;
+    default:
+        printf("잘못된 월입니다.\\n");
+    }
+    return 0;
+}`, ["여러 case가 같은 동작을 하면 연속해서 배치할 수 있다.", "각 분기 끝에는 break를 넣어 다음 case 실행을 막는다.", "범위 밖 입력은 default에서 처리한다."]);
+
+      if (title.includes("입장료")) return sol(`
+#include <stdio.h>
+
+int main(void) {
+    int age, price;
+
+    scanf("%d", &age);
+    if (age < 13) price = 5000;
+    else if (age < 20) price = 7000;
+    else if (age >= 65) price = 6000;
+    else price = 10000;
+
+    printf("입장료: %d원\\n", price);
+    return 0;
+}`, ["조건 순서에 따라 같은 나이도 다른 분기로 갈 수 있다.", "else if를 사용하면 여러 조건 중 하나만 선택된다.", "성인 조건은 나머지 경우로 처리할 수 있다."]);
+
       if (title.includes("거스름돈")) return sol(`
 #include <stdio.h>
 
@@ -1555,6 +1868,39 @@ int main(void) {
     printf("주차 요금: %d원\\n", fee);
     return 0;
 }`, ["추가 시간은 올림 나눗셈을 사용한다.", "(남은 시간 + 단위 - 1) / 단위 패턴을 기억한다.", "마지막에 최대 요금을 한 번 더 적용한다."]);
+
+      if (title.includes("배수 제외")) return sol(`
+#include <stdio.h>
+
+int main(void) {
+    int n, divisor = 3;
+    int sum = 0;
+
+    scanf("%d", &n);
+    for (int i = 1; i <= n; i++) {
+        if (i % divisor == 0) continue;
+        sum += i;
+    }
+
+    printf("%d의 배수 제외 합: %d\\n", divisor, sum);
+    return 0;
+}`, ["continue는 현재 반복의 남은 문장을 건너뛴다.", "배수 판별은 나머지 연산자 %를 사용한다.", "제외할 divisor 값만 바꾸면 변형 문제에 대응할 수 있다."]);
+
+      if (title.includes("자릿수 합")) return sol(`
+#include <stdio.h>
+
+int main(void) {
+    int n, sum = 0;
+
+    scanf("%d", &n);
+    while (n > 0) {
+        sum += n % 10;
+        n /= 10;
+    }
+
+    printf("자릿수 합: %d\\n", sum);
+    return 0;
+}`, ["n % 10은 마지막 자리 숫자를 구한다.", "n /= 10은 마지막 자리를 제거한다.", "while 조건이 거짓이 되면 모든 자릿수를 처리한 것이다."]);
 
       if (title.includes("누적합 메뉴")) return sol(`
 #include <stdio.h>
@@ -1644,6 +1990,39 @@ int main(void) {
     return 0;
 }`, ["재귀 함수에는 반드시 종료 조건이 필요하다.", "start를 1씩 증가시키며 end에 도달하게 만든다.", "구간을 포함하는 합인지 확인한다."]);
 
+      if (title.includes("세 정수 최댓값")) return sol(`
+#include <stdio.h>
+
+int max3(int a, int b, int c) {
+    int max = a;
+    if (b > max) max = b;
+    if (c > max) max = c;
+    return max;
+}
+
+int main(void) {
+    int a, b, c;
+    scanf("%d %d %d", &a, &b, &c);
+    printf("최댓값: %d\\n", max3(a, b, c));
+    return 0;
+}`, ["함수는 입력받은 세 값을 인수로 전달받는다.", "첫 값을 기준 최댓값으로 두고 나머지와 비교한다.", "계산 결과는 return으로 main에 돌려준다."]);
+
+      if (title.includes("거듭제곱")) return sol(`
+#include <stdio.h>
+
+int power(int base, int exp) {
+    int result = 1;
+    for (int i = 0; i < exp; i++) result *= base;
+    return result;
+}
+
+int main(void) {
+    int base, exp;
+    scanf("%d %d", &base, &exp);
+    printf("%d^%d = %d\\n", base, exp, power(base, exp));
+    return 0;
+}`, ["반복 횟수는 지수 exp와 같다.", "결과 변수는 곱셈 항등원인 1로 초기화한다.", "함수는 계산만 담당하고 출력은 main에서 해도 된다."]);
+
       if (title.includes("팩토리얼")) return sol(`
 #include <stdio.h>
 
@@ -1658,6 +2037,29 @@ int main(void) {
     printf("%d! = %d\\n", n, factorial(n));
     return 0;
 }`, ["n이 1 이하일 때 1을 반환한다.", "재귀 호출은 n - 1로 문제 크기를 줄인다.", "입력 범위가 커지면 int 범위를 넘을 수 있다."]);
+
+      if (title.includes("static 최댓값")) return sol(`
+#include <stdio.h>
+
+void remember_max(int value) {
+    static int initialized = 0;
+    static int max_value;
+
+    if (!initialized || value > max_value) {
+        max_value = value;
+        initialized = 1;
+    }
+    printf("입력: %d, 현재 최댓값: %d\\n", value, max_value);
+}
+
+int main(void) {
+    int value;
+    for (int i = 0; i < 4; i++) {
+        scanf("%d", &value);
+        remember_max(value);
+    }
+    return 0;
+}`, ["static 변수는 함수 호출 사이에도 값을 유지한다.", "첫 호출 여부를 따로 관리하면 어떤 값이 들어와도 안전하다.", "새 값이 더 클 때만 최댓값을 갱신한다."]);
 
       if (title.includes("static")) return sol(`
 #include <stdio.h>
@@ -1702,6 +2104,25 @@ int main(void) {
     return 0;
 }`, ["메뉴는 while 반복문으로 계속 처리한다.", "입금/출금 기능을 함수로 분리한다.", "잔액 부족 시 balance를 그대로 반환한다."]);
 
+      if (title.includes("재고 차감")) return sol(`
+#include <stdio.h>
+
+int stock = 20;
+
+void sell(int amount) {
+    stock -= amount;
+    printf("판매: %d, 남은 재고: %d\\n", amount, stock);
+}
+
+int main(void) {
+    int amount;
+    for (int i = 0; i < 3; i++) {
+        scanf("%d", &amount);
+        sell(amount);
+    }
+    return 0;
+}`, ["전역 변수 stock은 sell 함수와 main에서 공유된다.", "함수 안에서 전역 변수 값을 직접 갱신할 수 있다.", "지역 변수 amount는 입력 수량만 임시로 저장한다."]);
+
       if (title.includes("주사위")) return sol(`
 #include <stdio.h>
 
@@ -1726,6 +2147,41 @@ int main(void) {
     else printf("x,y 점수는 동점\\n");
     return 0;
 }`, ["전역 변수는 여러 함수에서 누적 상태를 공유한다.", "라운드마다 DiceGame을 호출한다.", "마지막에 누적 점수로 승패를 판단한다."]);
+
+      if (title.includes("특정 문자 개수")) return sol(`
+#include <stdio.h>
+
+int main(void) {
+    char str[100];
+    char target;
+    int count = 0;
+
+    scanf("%s", str);
+    scanf(" %c", &target);
+
+    for (int i = 0; str[i] != '\\0'; i++) {
+        if (str[i] == target) count++;
+    }
+
+    printf("%c 개수: %d\\n", target, count);
+    return 0;
+}`, ["문자열은 널 문자를 만날 때까지 순회한다.", "문자 입력 앞에는 공백을 넣어 개행을 건너뛴다.", "같은 문자를 찾을 때마다 count를 증가시킨다."]);
+
+      if (title.includes("길이 직접")) return sol(`
+#include <stdio.h>
+
+int main(void) {
+    char str[100];
+    int len = 0;
+
+    scanf("%s", str);
+    while (str[len] != '\\0') {
+        len++;
+    }
+
+    printf("길이: %d\\n", len);
+    return 0;
+}`, ["strlen 없이 널 문자 위치를 직접 찾는다.", "문자 배열 인덱스는 0부터 증가한다.", "널 문자 전까지의 문자 개수가 문자열 길이다."]);
 
       if (title.includes("배열 구간 합")) return sol(`
 #include <stdio.h>
@@ -1845,6 +2301,37 @@ int main(void) {
     return 0;
 }`, ["행 하나가 학생 한 명의 점수 묶음이다.", "행별로 total을 0으로 다시 초기화한다.", "정수 평균은 소수 부분이 버려진다."]);
 
+      if (title.includes("문자열 비교")) return sol(`
+#include <stdio.h>
+#include <string.h>
+
+int main(void) {
+    char str1[50], str2[50];
+
+    scanf("%s", str1);
+    scanf("%s", str2);
+
+    if (strcmp(str1, str2) == 0) printf("같음\\n");
+    else printf("다름\\n");
+    return 0;
+}`, ["문자열은 ==로 비교하지 않는다.", "strcmp 결과가 0이면 두 문자열이 같다.", "string.h를 포함해야 strcmp를 사용할 수 있다."]);
+
+      if (title.includes("문자열 복사와 추가")) return sol(`
+#include <stdio.h>
+#include <string.h>
+
+int main(void) {
+    char family[30], given[30], full[60];
+
+    scanf("%s", family);
+    scanf("%s", given);
+
+    strcpy(full, family);
+    strcat(full, given);
+    printf("%s\\n", full);
+    return 0;
+}`, ["strcpy는 대상 배열에 첫 문자열을 복사한다.", "strcat은 대상 문자열 끝에 새 문자열을 붙인다.", "결과 배열은 두 문자열을 담을 만큼 충분히 커야 한다."]);
+
       if (title.includes("포인터 간접")) return sol(`
 #include <stdio.h>
 
@@ -1896,6 +2383,21 @@ int main(void) {
     for (int i = 0; i < 6; i++) printf("%d ", arr[i]);
     return 0;
 }`, ["포인터로 배열 원소를 읽고 수정할 수 있다.", "*(ptr + i)는 arr[i]와 같은 원소다.", "증가량은 문제 조건에 맞게 바꾼다."]);
+
+      if (title.includes("특정 원소")) return sol(`
+#include <stdio.h>
+
+int main(void) {
+    int arr[5];
+    int index;
+    int *ptr = arr;
+
+    for (int i = 0; i < 5; i++) scanf("%d", ptr + i);
+    scanf("%d", &index);
+
+    printf("선택 원소: %d\\n", *(ptr + index));
+    return 0;
+}`, ["배열 이름은 첫 원소의 주소처럼 사용할 수 있다.", "ptr + index는 index번째 원소의 주소다.", "간접 참조로 해당 원소 값을 읽는다."]);
 
       if (title.includes("strcpy") || title.includes("줄바꿈 문자열")) return sol(`
 #include <stdio.h>
@@ -1958,6 +2460,24 @@ int main(void) {
     return 0;
 }`, ["마지막 문자부터 첫 문자까지 복사한다.", "복사 후 tmp 끝에 널 문자를 넣는다.", "공백 없는 문자열은 scanf(\"%s\")로 받을 수 있다."]);
 
+      if (title.includes("공백 제외")) return sol(`
+#include <stdio.h>
+
+int main(void) {
+    char str[100];
+    char *ptr = str;
+    int count = 0;
+
+    fgets(str, sizeof(str), stdin);
+    while (*ptr != '\\0') {
+        if (*ptr != ' ' && *ptr != '\\n') count++;
+        ptr++;
+    }
+
+    printf("문자 수: %d\\n", count);
+    return 0;
+}`, ["fgets는 공백이 포함된 문자열을 입력받을 수 있다.", "포인터를 증가시키며 한 글자씩 확인한다.", "공백과 개행 문자는 개수에서 제외한다."]);
+
       if (title.includes("POINT")) return sol(`
 #include <stdio.h>
 #include <math.h>
@@ -1996,6 +2516,29 @@ int main(void) {
     print_product(&item);
     return 0;
 }`, ["구조체 포인터 멤버 접근은 -> 연산자를 쓴다.", "문자 배열 이름은 scanf에서 &를 붙이지 않는다.", "함수에 &item을 넘겨 원본 주소를 전달한다."]);
+
+      if (title.includes("STUDENT")) return sol(`
+#include <stdio.h>
+
+typedef struct {
+    char name[20];
+    int mid;
+    int final;
+} STUDENT;
+
+int total_score(STUDENT s) {
+    return s.mid + s.final;
+}
+
+int main(void) {
+    STUDENT s;
+
+    scanf("%s", s.name);
+    scanf("%d %d", &s.mid, &s.final);
+
+    printf("%s 총점: %d\\n", s.name, total_score(s));
+    return 0;
+}`, ["서로 다른 자료형을 STUDENT 구조체로 묶는다.", "구조체 변수의 멤버는 . 연산자로 접근한다.", "구조체를 함수 인수로 전달해 계산할 수 있다."]);
 
       if (title.includes("PRODUCT 구조체 배열")) return sol(`
 #include <stdio.h>
@@ -2096,7 +2639,8 @@ int main(void) {
                     <ol class="worksheet-list">${item.overview.steps.map(line => `<li>${escapeHtml(line)}</li>`).join("")}</ol>
                     <p><strong>입력 조건</strong></p>
                     <ul class="worksheet-list">${item.overview.inputs.map(line => `<li>${escapeHtml(line)}</li>`).join("")}</ul>
-                    <p><strong>주의할 변형 조건</strong>: ${escapeHtml(item.overview.extension)}</p>
+                    <p><strong>세부 조건 및 채점 기준</strong></p>
+                    <ul class="worksheet-list">${item.overview.rules.map(line => `<li>${escapeHtml(line)}</li>`).join("")}</ul>
                   </div>
                 </div>
 
@@ -2108,7 +2652,7 @@ int main(void) {
 
                 <div class="worksheet-bar">예시 코드</div>
                 <div class="worksheet-body">
-                  <span class="worksheet-skeleton">Put your answer</span>
+                  <span class="worksheet-skeleton">구현할 부분</span>
                   <pre class="worksheet-code">${escapeHtml(item.skeleton)}</pre>
                 </div>
 
@@ -2189,7 +2733,8 @@ int main(void) {
           item.overview.steps.forEach(line => lines.push(`- ${line}`));
           lines.push("", "입력 조건");
           item.overview.inputs.forEach(line => lines.push(`- ${line}`));
-          lines.push("", `변형/확장 포인트: ${item.overview.extension}`);
+          lines.push("", "세부 조건 및 채점 기준");
+          item.overview.rules.forEach(line => lines.push(`- ${line}`));
           lines.push("");
           lines.push("#### 2. 출력 형식");
           item.outputSpec.forEach(line => lines.push(`- ${line}`));
